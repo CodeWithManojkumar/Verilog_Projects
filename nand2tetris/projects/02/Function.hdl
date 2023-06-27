@@ -1,0 +1,57 @@
+
+CHIP Function {
+    IN a[16],b[16],sel;
+    OUT out[16];
+
+    PARTS:
+
+FullAdder(a=a[0],b=b[0],c=false,sum=out10,carry=c0);
+And(a=a[0],b=b[0],out=out20);
+Mux(a=out20,b=out10,sel=sel,out=out[0]);
+FullAdder(a=a[1],b=b[1],c=c0,sum=out11,carry=c1);
+And(a=a[1],b=b[1],out=out21);
+Mux(a=out21,b=out11,sel=sel,out=out[1]);
+FullAdder(a=a[2],b=b[2],c=c1,sum=out12,carry=c2);
+And(a=a[2],b=b[2],out=out22);
+Mux(a=out22,b=out12,sel=sel,out=out[2]);
+FullAdder(a=a[3],b=b[3],c=c2,sum=out13,carry=c3);
+And(a=a[3],b=b[3],out=out23);
+Mux(a=out23,b=out13,sel=sel,out=out[3]);
+FullAdder(a=a[4],b=b[4],c=c3,sum=out14,carry=c4);
+And(a=a[4],b=b[4],out=out24);
+Mux(a=out24,b=out14,sel=sel,out=out[4]);
+FullAdder(a=a[5],b=b[5],c=c4,sum=out15,carry=c5);
+And(a=a[5],b=b[5],out=out25);
+Mux(a=out25,b=out15,sel=sel,out=out[5]);
+FullAdder(a=a[6],b=b[6],c=c5,sum=out16,carry=c6);
+And(a=a[6],b=b[6],out=out26);
+Mux(a=out26,b=out16,sel=sel,out=out[6]);
+FullAdder(a=a[7],b=b[7],c=c6,sum=out17,carry=c7);
+And(a=a[7],b=b[7],out=out27);
+Mux(a=out27,b=out17,sel=sel,out=out[7]);
+FullAdder(a=a[8],b=b[8],c=c7,sum=out18,carry=c8);
+And(a=a[8],b=b[8],out=out28);
+Mux(a=out28,b=out18,sel=sel,out=out[8]);
+FullAdder(a=a[9],b=b[9],c=c8,sum=out19,carry=c9);
+And(a=a[9],b=b[9],out=out29);
+Mux(a=out29,b=out19,sel=sel,out=out[9]);
+FullAdder(a=a[10],b=b[10],c=c9,sum=out110,carry=c10);
+And(a=a[10],b=b[10],out=out210);
+Mux(a=out210,b=out110,sel=sel,out=out[10]);
+FullAdder(a=a[11],b=b[11],c=c10,sum=out111,carry=c11);
+And(a=a[11],b=b[11],out=out211);
+Mux(a=out211,b=out111,sel=sel,out=out[11]);
+FullAdder(a=a[12],b=b[12],c=c11,sum=out112,carry=c12);
+And(a=a[12],b=b[12],out=out212);
+Mux(a=out212,b=out112,sel=sel,out=out[12]);
+FullAdder(a=a[13],b=b[13],c=c12,sum=out113,carry=c13);
+And(a=a[13],b=b[13],out=out213);
+Mux(a=out213,b=out113,sel=sel,out=out[13]);
+FullAdder(a=a[14],b=b[14],c=c13,sum=out114,carry=c14);
+And(a=a[14],b=b[14],out=out214);
+Mux(a=out214,b=out114,sel=sel,out=out[14]);
+FullAdder(a=a[15],b=b[15],c=c14,sum=out115,carry=c15);
+And(a=a[15],b=b[15],out=out215);
+Mux(a=out215,b=out115,sel=sel,out=out[15]);
+
+}
