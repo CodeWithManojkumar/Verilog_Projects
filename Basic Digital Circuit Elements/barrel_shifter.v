@@ -16,3 +16,5 @@ always_comb
 		default: y=a;
 	endcase
 endmodule
+// Main disadvantage is this chip is not scalable 
+// can't be used for higher order bits
