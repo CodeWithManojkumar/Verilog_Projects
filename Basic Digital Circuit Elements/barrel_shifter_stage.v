@@ -10,6 +10,6 @@ assign s0 = amt[0] ? {a[0],a[7:1]} : a;
 // stage 1, shift 0 or 1 bit
 assign s1 = amt[1] ? {s0[1:0],s0[7:2]} : s0;
 // stage 0, shift 0 or 1 bit
-assign y = amt[0] ? {s1[3:0],s1[7:4]} : s1;
+assign y = amt[2] ? {s1[3:0],s1[7:4]} : s1;
 
 endmodule
