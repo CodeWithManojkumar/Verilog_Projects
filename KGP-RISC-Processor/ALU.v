@@ -23,6 +23,7 @@ module ALU(
                     4'b0111  :  ALUout = operand1 <<< operand2;
                     4'b1000  :  ALUout = operand1 >> operand2;
                     4'b1001  :  ALUout = operand1 >>> operand2;
+                    4'b1010  :  ALUout = operand1 + {operand2[29:0],2'b00};
                 endcase
             end
     end

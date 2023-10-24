@@ -7,6 +7,9 @@ module register_bank (
 reg [31:0] regfile[0:31];
 integer k;
 
+initial begin
+	regfile[0] <= 32'b0;
+end
 assign rData1 = regfile[sr1];
 assign rData2 = regfile[sr2];
 
@@ -20,7 +23,7 @@ always @(posedge clk)
 		end 
 		
 		else begin
-			if(write) 
+			if(write && dr!=3'b0) 
 				regfile[dr] <= wrData;
 			end
 	end

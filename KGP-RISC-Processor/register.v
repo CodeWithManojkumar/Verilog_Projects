@@ -1,6 +1,6 @@
 module register (
+	input wire clk,reset,ld,
     input wire [15:0] din,
-	input wire ld,clk,reset,
 	output reg [15:0] dout
 );
 

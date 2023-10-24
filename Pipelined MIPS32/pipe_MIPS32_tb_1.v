@@ -26,7 +26,7 @@ initial
 		mips.Mem[2] = 32'h28030019; // ADDI R3,R0,25
 		mips.Mem[3] = 32'h0ce77800; // OR R7,R7,R7 // DUMMY INSTR.
 		mips.Mem[4] = 32'h0ce77800; // OR R7,R7,R7 // DUMMY INSTR.
-		mips.Mem[5] = 32'h00222000; // ADD R4,R1,R2
+		mips.Mem[5] = 32'h00222000; // ADD R4,R1,R2 000000 00100 
 		mips.Mem[6] = 32'h0ce77800; // OR R7,R7,R7 // DUMMY INSTR.
 		mips.Mem[7] = 32'h00832800; // ADD R5,R4,R3
 		mips.Mem[8] = 32'hfc000000; // HLT
