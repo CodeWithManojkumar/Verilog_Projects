@@ -13,7 +13,7 @@ module datapath(
     input wire [1:0] opcond,
     input wire alusel1,alusel2,aluen,ldaluout,
     input wire [3:0] alufunc,
-    input wire writedmem,readdmem,ldlmd,
+    input wire regwrite,writedmem,readdmem,ldlmd,
     input wire selwb,branch,ldpc,
 
     output reg [31:0] irout,aluout,

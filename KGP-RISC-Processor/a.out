@@ -7,44 +7,44 @@
 :vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
 :vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
 :vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
-S_00000275b7612830 .scope module, "instr_mem" "instr_mem" 2 1;
+S_0000029f47882830 .scope module, "instr_mem" "instr_mem" 2 1;
  .timescale 0 0;
     .port_info 0 /INPUT 1 "read";
     .port_info 1 /INPUT 6 "addr";
     .port_info 2 /OUTPUT 32 "I";
-v00000275b7613240_0 .net "I", 31 0, L_00000275b75fbab0;  1 drivers
-v00000275b7612eb0_0 .net *"_ivl_0", 31 0, L_00000275b75fb970;  1 drivers
-v00000275b75f9210_0 .net *"_ivl_2", 7 0, L_00000275b75fba10;  1 drivers
-L_00000275b7688018 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
-v00000275b76129c0_0 .net *"_ivl_5", 1 0, L_00000275b7688018;  1 drivers
-L_00000275b7688060 .functor BUFT 1, C4<xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx>, C4<0>, C4<0>, C4<0>;
-v00000275b7612a60_0 .net *"_ivl_6", 31 0, L_00000275b7688060;  1 drivers
-o00000275b7647098 .functor BUFZ 6, C4<zzzzzz>; HiZ drive
-v00000275b7612b00_0 .net "addr", 5 0, o00000275b7647098;  0 drivers
-v00000275b7612ba0_0 .var/i "i", 31 0;
-v00000275b7612c40 .array "imem", 0 63, 31 0;
-o00000275b76470f8 .functor BUFZ 1, C4<z>; HiZ drive
-v00000275b75fb8d0_0 .net "read", 0 0, o00000275b76470f8;  0 drivers
-L_00000275b75fb970 .array/port v00000275b7612c40, L_00000275b75fba10;
-L_00000275b75fba10 .concat [ 6 2 0 0], o00000275b7647098, L_00000275b7688018;
-L_00000275b75fbab0 .functor MUXZ 32, L_00000275b7688060, L_00000275b75fb970, o00000275b76470f8, C4<>;
-    .scope S_00000275b7612830;
+v0000029f47883240_0 .net "I", 31 0, L_0000029f4786bab0;  1 drivers
+v0000029f47882eb0_0 .net *"_ivl_0", 31 0, L_0000029f4786b970;  1 drivers
+v0000029f47869210_0 .net *"_ivl_2", 7 0, L_0000029f4786ba10;  1 drivers
+L_0000029f478f8018 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
+v0000029f478829c0_0 .net *"_ivl_5", 1 0, L_0000029f478f8018;  1 drivers
+L_0000029f478f8060 .functor BUFT 1, C4<xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx>, C4<0>, C4<0>, C4<0>;
+v0000029f47882a60_0 .net *"_ivl_6", 31 0, L_0000029f478f8060;  1 drivers
+o0000029f478b7098 .functor BUFZ 6, C4<zzzzzz>; HiZ drive
+v0000029f47882b00_0 .net "addr", 5 0, o0000029f478b7098;  0 drivers
+v0000029f47882ba0_0 .var/i "i", 31 0;
+v0000029f47882c40 .array "imem", 0 63, 31 0;
+o0000029f478b70f8 .functor BUFZ 1, C4<z>; HiZ drive
+v0000029f4786b8d0_0 .net "read", 0 0, o0000029f478b70f8;  0 drivers
+L_0000029f4786b970 .array/port v0000029f47882c40, L_0000029f4786ba10;
+L_0000029f4786ba10 .concat [ 6 2 0 0], o0000029f478b7098, L_0000029f478f8018;
+L_0000029f4786bab0 .functor MUXZ 32, L_0000029f478f8060, L_0000029f4786b970, o0000029f478b70f8, C4<>;
+    .scope S_0000029f47882830;
 T_0 ;
-    %vpi_call 2 9 "$readmemh", "instr.txt", v00000275b7612c40 {0 0 0};
+    %vpi_call 2 9 "$readmemh", "instr.txt", v0000029f47882c40 {0 0 0};
     %end;
     .thread T_0;
-    .scope S_00000275b7612830;
+    .scope S_0000029f47882830;
 T_1 ;
     %pushi/vec4 0, 0, 32;
-    %store/vec4 v00000275b7612ba0_0, 0, 32;
+    %store/vec4 v0000029f47882ba0_0, 0, 32;
 T_1.0 ;
-    %load/vec4 v00000275b7612ba0_0;
-    %cmpi/s 18, 0, 32;
+    %load/vec4 v0000029f47882ba0_0;
+    %cmpi/s 64, 0, 32;
     %jmp/0xz T_1.1, 5;
-    %vpi_call 2 14 "$display", "mem[%0d] = %h ", v00000275b7612ba0_0, &A<v00000275b7612c40, v00000275b7612ba0_0 > {0 0 0};
-    %load/vec4 v00000275b7612ba0_0;
+    %vpi_call 2 14 "$display", "mem[%0d] = %h ", v0000029f47882ba0_0, &A<v0000029f47882c40, v0000029f47882ba0_0 > {0 0 0};
+    %load/vec4 v0000029f47882ba0_0;
     %addi 1, 0, 32;
-    %store/vec4 v00000275b7612ba0_0, 0, 32;
+    %store/vec4 v0000029f47882ba0_0, 0, 32;
     %jmp T_1.0;
 T_1.1 ;
     %end;
