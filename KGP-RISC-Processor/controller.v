@@ -4,7 +4,7 @@ module controller (
 
     output wire readim,ldir,ldnpc,
     output wire ldA,ldB,ldimm,
-    output wire [1:0],
+    output wire [1:0] opcond,
     output wire opcond,alusel1,alusel2,aluen,ldaluout,
     output wire [3:0] alufunc,
     output wire writedmem,readdmem,ldlmd,
