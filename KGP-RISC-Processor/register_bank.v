@@ -23,9 +23,14 @@ always @(posedge clk)
 		end 
 		
 		else begin
-			if(write && dr!=3'b0) 
+			if(write) 
+			begin
+				if(dr == 3'b000) 
+					regfile[dr] <= 32'b0;
+				else
 				regfile[dr] <= wrData;
 			end
+		end
 	end
     
 endmodule

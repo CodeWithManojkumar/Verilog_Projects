@@ -13,6 +13,8 @@ module GCD_test;
 
 	initial 
 		begin
+			$dumpfile("test.vcd");
+			$dumpvars(0,GCD_test);
 			clk=1'b0;
 			#3 start=1'b1;
 			#1000 $finish;

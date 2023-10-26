@@ -16,6 +16,8 @@ register_bank rf(.rData1(rData1),.rData2(rData2),.wrData(out),.sr1(sr1),.sr2(sr2
 ALU uut(.operand1(rData1), .operand2(rData2), .mode(mode),.en(en),.out(ALUout));
 
 initial begin
+    $dumpfile("test.vcd");
+    $dumpvars(0,ALU_regbank_test);
     clk = 0;en=0;reset=0;sel=1;
     #2 write=1; dr=5'b00001; wrData=370;
     #5 dr=5'b00010; wrData=4;

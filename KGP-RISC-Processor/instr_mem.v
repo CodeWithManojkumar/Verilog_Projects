@@ -4,7 +4,7 @@ module instr_mem (
     output wire [31:0] I
 );
     
-reg [31:0] imem[63:0];
+reg [31:0] imem[0:63];
 initial
       $readmemh("instr.txt", imem);
 /*
