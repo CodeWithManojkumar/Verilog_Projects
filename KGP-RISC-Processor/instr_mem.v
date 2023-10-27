@@ -5,8 +5,8 @@ module instr_mem (
 );
     
 reg [31:0] imem[0:63];
-initial
-      $readmemh("instr.txt", imem);
+// initial
+//       $readmemh("instr.txt", imem);
 /*
 integer i;
 initial begin

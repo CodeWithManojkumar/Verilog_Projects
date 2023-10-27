@@ -19,7 +19,9 @@ module mips_tb;
     reset = 1;
     #15 reset = 0;
 
-  $readmemh("instr_test.txt", dut.dpath.imem.imem); // Load instructions from a file
+  // $readmemh("instr_test.txt", dut.dpath.imem.imem); // Basic Instructions
+  $readmemh("gcd_test.txt", dut.dpath.imem.imem);     // GCD instructions
+
   end
 
   // Monitor the output
@@ -27,8 +29,15 @@ module mips_tb;
     $dumpfile("test.vcd");
     $dumpvars(0, mips_tb);
 
-    $monitor($time," register values : %d  %d  %d %d %d",dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.rbank.regfile[4],dut.dpath.dmem.dmem[7]);
+    // Basic Instructions Results
+    // $monitor($time," register values : %d  %d  %d  %d  %d",
+    // dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.rbank.regfile[4],dut.dpath.dmem.dmem[7]);
 
-    #1000 $finish; // Finish the simulation after 1000 time units
+
+    // GCD Results
+    $monitor($time," register values : %d  %d  %d data_memory:  %d  %d  %d",
+    dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.dmem.dmem[0],dut.dpath.dmem.dmem[1],dut.dpath.dmem.dmem[2]);
+
+    #5000 $finish; // Finish the simulation after 5000 time units
   end
 endmodule

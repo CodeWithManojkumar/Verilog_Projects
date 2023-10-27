@@ -1,6 +1,6 @@
 module COMPARE(lt,gt,eq,data1,data2);
 
-	input [31:0] data1,data2;
+	input signed [31:0] data1,data2;
 	output lt,gt,eq;
 	
 	assign lt=data1<data2;
