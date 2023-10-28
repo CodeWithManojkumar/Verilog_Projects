@@ -1,7 +1,7 @@
 module register (
 	input wire clk,reset,ld,
-    input wire [31:0] din,
-	output reg [31:0] dout
+    input wire signed [31:0] din,
+	output reg signed [31:0] dout
 );
 
 	always @(posedge clk)

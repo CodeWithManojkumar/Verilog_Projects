@@ -1,10 +1,10 @@
 module register_bank (
     input wire clk,write,reset,
     input wire  [4:0] sr1,sr2,dr,
-    input wire [31:0] wrData,
-    output wire [31:0] rData1,rData2
+    input wire signed [31:0] wrData,
+    output wire signed[31:0] rData1,rData2
 );
-reg [31:0] regfile[0:31];
+reg signed[31:0] regfile[0:31];
 integer k;
 
 initial begin

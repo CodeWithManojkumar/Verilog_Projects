@@ -6,7 +6,7 @@ module data_mem (
     output wire [31:0] dout
 );
     
-reg [31:0] dmem[0:1023];
+reg signed [31:0] dmem[0:1023];
 integer k;
 always @(posedge clk) 
 begin
