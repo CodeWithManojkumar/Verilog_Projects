@@ -1,13 +1,15 @@
-module register (
+module register 
+#(parameter N = 32;)
+(
 	input wire clk,reset,ld,
-    input wire signed [31:0] din,
-	output reg signed [31:0] dout
+    input wire signed [N-1:0] din,
+	output reg signed [N-1:0] dout
 );
 
 	always @(posedge clk)
     begin
         if(reset)
-            dout<=32'b0;
+            dout<=(N-1)'b0;
         else if(ld)
             dout<=din;
     end

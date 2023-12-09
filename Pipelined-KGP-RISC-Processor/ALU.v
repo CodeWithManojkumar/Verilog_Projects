@@ -3,6 +3,7 @@ module ALU(
     input wire signed [31:0] operand2,
     input wire [3:0] mode,
     input wire en,
+    output wire zero,
     output wire signed [31:0] out
 );
 
@@ -29,6 +30,7 @@ module ALU(
     end
 
     assign out = ALUout;
+    assign zero = (ALUout == 0)? 1 : 0;
 
     // tested successfully
 

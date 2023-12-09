@@ -5,13 +5,21 @@ module register_bank (
     output wire signed[31:0] rData1,rData2
 );
 reg signed[31:0] regfile[0:31];
+reg signed[31:0] regData1,regData2;
 integer k;
 
 initial begin
 	regfile[0] <= 32'b0;
 end
-assign rData1 = regfile[sr1];
-assign rData2 = regfile[sr2];
+
+assign rData1 = regData1;
+assign rData2 = regData2;
+
+always @(negedge clk) 
+	begin
+		regData1 <= regfile[sr1];
+		regData2 <= regfile[sr2];
+	end
 
 always @(posedge clk)
 	begin
