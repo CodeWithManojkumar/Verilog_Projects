@@ -61,11 +61,11 @@ begin
             end
             2'b10 : begin
                 case (irout[31:26])
-                    6'b100001 : control_signals <= 12'b000000000010; // BR
-                    6'b100010 : control_signals <= 12'b000000000001; // BLT
-                    6'b100010 : control_signals <= 12'b000000000001; // BGT
-                    6'b100010 : control_signals <= 12'b000000000001; // BEQ
-                    6'b100010 : control_signals <= 12'b000000000001; // BNE
+                    6'b110000 : control_signals <= 12'b000000000001; // BLT
+                    6'b110001 : control_signals <= 12'b000000000001; // BGT
+                    6'b110010 : control_signals <= 12'b000000000001; // BEQ
+                    6'b110011 : control_signals <= 12'b000000000001; // BNE
+                    6'b110100 : control_signals <= 12'b000000000010; // BR
                 endcase
             end
         endcase
