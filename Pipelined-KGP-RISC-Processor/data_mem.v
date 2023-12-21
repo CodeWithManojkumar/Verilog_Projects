@@ -18,7 +18,7 @@ begin
 		end 
 	end
     else if(write == 1)
-        dmem[addr[9:0]] <= din;
+       #1 dmem[addr[9:0]] <= din;
 end
 
 assign dout = (read)? dmem[addr[9:0]] : 32'bx;

@@ -1,7 +1,7 @@
 module stall_control (
     input wire id_ex_readdmem,
-    input wire [31:0] id_ex_rt,
-    input wire [31:0] rs,rt,
+    input wire [4:0] id_ex_rt,
+    input wire [4:0] rs,rt,
 
     output wire stall,pc_write,if_id_write
 );

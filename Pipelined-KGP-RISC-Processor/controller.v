@@ -1,4 +1,5 @@
 module controller (
+    input wire clk,reset,
     input wire [31:0] instr,
     input wire branch_condition,
     output wire alusrc,
@@ -14,13 +15,13 @@ wire branch;
 assign {alusrc,alufunc,regdest,
     readdmem,writedmem,regwrite,memtoreg,jump,branch} = control_signals;
 
-always @* 
+always @(posedge clk or negedge reset)
 begin
     if(reset) begin
         control_signals <= 12'b0;
     end
 
-    else begin
+    else #1 begin
         case (instr[31:30])
             2'b00 : begin
                 {control_signals[11],control_signals[6:0]} <= 8'b01001000;
@@ -40,27 +41,27 @@ begin
             2'b01 : begin
                 {control_signals[11],control_signals[6:0]} <= 8'b10001000;
                 case (instr[31:26])
-                    6'b010000 : control_signals[11:8] <= 4'b0000; // ADDI
-                    6'b010001 : control_signals[11:8] <= 4'b0001; // SUBI
-                    6'b010010 : control_signals[11:8] <= 4'b0010; // ANDI
-                    6'b010011 : control_signals[11:8] <= 4'b0011; // ORI
-                    6'b010100 : control_signals[11:8] <= 4'b0100; // XORI
-                    6'b010101 : control_signals[11:8] <= 4'b0101; // NOTI
-                    6'b010110 : control_signals[11:8] <= 4'b0110; // SLAI
-                    6'b010111 : control_signals[11:8] <= 4'b0111; // SLLI
-                    6'b011000 : control_signals[11:8] <= 4'b1000; // SRAI
-                    6'b011001 : control_signals[11:8] <= 4'b1001; // SRLI
-                    6'b011010 : control_signals[11:8] <= 4'b0000; // MOVE
+                    6'b010000 : control_signals[10:7] <= 4'b0000; // ADDI
+                    6'b010001 : control_signals[10:7] <= 4'b0001; // SUBI
+                    6'b010010 : control_signals[10:7] <= 4'b0010; // ANDI
+                    6'b010011 : control_signals[10:7] <= 4'b0011; // ORI
+                    6'b010100 : control_signals[10:7] <= 4'b0100; // XORI
+                    6'b010101 : control_signals[10:7] <= 4'b0101; // NOTI
+                    6'b010110 : control_signals[10:7] <= 4'b0110; // SLAI
+                    6'b010111 : control_signals[10:7] <= 4'b0111; // SLLI
+                    6'b011000 : control_signals[10:7] <= 4'b1000; // SRAI
+                    6'b011001 : control_signals[10:7] <= 4'b1001; // SRLI
+                    6'b011010 : control_signals[10:7] <= 4'b0000; // MOVE
                 endcase
             end
             2'b10 : begin
-                case (irout[31:26])
-                    6'b100001 : control_signals <= 12'b100000001100; // LD
+                case (instr[31:26])
+                    6'b100001 : control_signals <= 12'b100000101100; // LD
                     6'b100010 : control_signals <= 12'b100000010000; // ST
                 endcase
             end
             2'b10 : begin
-                case (irout[31:26])
+                case (instr[31:26])
                     6'b110000 : control_signals <= 12'b000000000001; // BLT
                     6'b110001 : control_signals <= 12'b000000000001; // BGT
                     6'b110010 : control_signals <= 12'b000000000001; // BEQ

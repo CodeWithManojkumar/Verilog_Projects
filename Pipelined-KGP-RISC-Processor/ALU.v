@@ -30,7 +30,7 @@ module ALU(
     end
 
     assign out = ALUout;
-    assign zero = (ALUout == 0)? 1 : 0;
+    assign zero = ALUout == 4'b0;
 
     // tested successfully
 

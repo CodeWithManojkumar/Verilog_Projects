@@ -1,27 +1,28 @@
 `include "mips.v"
 module mips_tb;
-  reg clk, reset;
-  wire [31:0] writedata;
+  reg clk,clkbar, reset;
   integer k;
 
   // Instantiate the module under test
   mips dut (
     .clk(clk),
-    .reset(reset),
-    .writedata(writedata)
+    .clkbar(clkbar),
+    .reset(reset)
   );
 
   // Provide a clock signal
   always #5 clk = ~clk;
+  always #5 clkbar = ~clkbar;
 
   // Initialize signals
   initial begin
     clk = 0;
+    clkbar = 1;
     reset = 1;
     #15 reset = 0;
 
-  $readmemh("instr_test.txt", dut.dpath.imem.imem); // Basic Instructions
-  // $readmemh("gcd_test.txt", dut.dpath.imem.imem);     // GCD instructions
+  $readmemh("instr_test.txt", dut.imem.imem); // Basic Instructions
+  // $readmemh("gcd_test.txt", dut.imem.imem);     // GCD instructions
   // $readmemh("sorting_test.txt", dut.dpath.imem.imem);    // Sorting instructions
 
   
@@ -36,12 +37,12 @@ module mips_tb;
 
     // Basic Instructions Results
     $monitor($time," register values : %d  %d  %d  %d  %d",
-    dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.rbank.regfile[4],dut.dpath.rbank.regfile[5],dut.dpath.dmem.dmem[7]);
+    dut.rbank.regfile[1],dut.rbank.regfile[2],dut.rbank.regfile[3],dut.rbank.regfile[4],dut.rbank.regfile[5],dut.dmem.dmem[7]);
 
 
     // GCD Results
     // $monitor($time," register values : %d  %d  %d data_memory:  %d  %d  %d",
-    // dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.dmem.dmem[0],dut.dpath.dmem.dmem[1],dut.dpath.dmem.dmem[2]);
+    // dut.rbank.regfile[1],dut.rbank.regfile[2],dut.rbank.regfile[3],dut.dmem.dmem[0],dut.dmem.dmem[1],dut.dmem.dmem[2]);
 
 
     // Sorting Results

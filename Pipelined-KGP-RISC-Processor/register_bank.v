@@ -15,7 +15,8 @@ end
 assign rData1 = regData1;
 assign rData2 = regData2;
 
-always @(negedge clk) 
+always @(posedge clk) 
+	#2
 	begin
 		regData1 <= regfile[sr1];
 		regData2 <= regfile[sr2];
@@ -29,11 +30,10 @@ always @(posedge clk)
 				regfile[k]<=0;
 			end 
 		end 
-		
 		else begin
 			if(write) 
 			begin
-				if(dr == 3'b000) 
+				if(dr == 5'b00000) 
 					regfile[dr] <= 32'b0;
 				else
 				regfile[dr] <= wrData;
