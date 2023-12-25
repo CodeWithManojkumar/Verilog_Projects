@@ -21,8 +21,8 @@ module mips_tb;
     #15 reset = 0;
 
   // $readmemh("instr_test.txt", dut.dpath.imem.imem); // Basic Instructions
-  $readmemh("gcd_test.txt", dut.dpath.imem.imem);     // GCD instructions
-  // $readmemh("sorting_test.txt", dut.dpath.imem.imem);    // Sorting instructions
+  // $readmemh("gcd_test.txt", dut.dpath.imem.imem);     // GCD instructions
+  $readmemh("sorting_test.txt", dut.dpath.imem.imem);    // Sorting instructions
 
   
   end
@@ -40,27 +40,27 @@ module mips_tb;
 
 
     // GCD Results
-    $monitor($time," register values : %d  %d  %d data_memory:  %d  %d  %d",
-    dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.dmem.dmem[0],dut.dpath.dmem.dmem[1],dut.dpath.dmem.dmem[2]);
+    // $monitor($time," register values : %d  %d  %d data_memory:  %d  %d  %d",
+    // dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.dmem.dmem[0],dut.dpath.dmem.dmem[1],dut.dpath.dmem.dmem[2]);
 
 
     // Sorting Results
-    // #20;
-    // dut.dpath.dmem.dmem[100] = 20;
-    // dut.dpath.dmem.dmem[101] = 50;
-    // dut.dpath.dmem.dmem[102] = 10;
-    // dut.dpath.dmem.dmem[103] = 30;
-    // dut.dpath.dmem.dmem[104] = 70;
-    // dut.dpath.dmem.dmem[105] = 40;
-    // dut.dpath.dmem.dmem[106] = 60;
-    // dut.dpath.dmem.dmem[107] = 80;
-    // dut.dpath.dmem.dmem[108] = 100;
-    // dut.dpath.dmem.dmem[109] = 90;
+    #20;
+    dut.dpath.dmem.dmem[100] = 20;
+    dut.dpath.dmem.dmem[101] = 50;
+    dut.dpath.dmem.dmem[102] = 10;
+    dut.dpath.dmem.dmem[103] = 30;
+    dut.dpath.dmem.dmem[104] = 70;
+    dut.dpath.dmem.dmem[105] = 40;
+    dut.dpath.dmem.dmem[106] = 60;
+    dut.dpath.dmem.dmem[107] = 80;
+    dut.dpath.dmem.dmem[108] = 100;
+    dut.dpath.dmem.dmem[109] = 90;
 
-    // $monitor($time," Array: %d %d %d %d %d %d %d %d %d %d ",dut.dpath.dmem.dmem[100],
-    // dut.dpath.dmem.dmem[101],dut.dpath.dmem.dmem[102],dut.dpath.dmem.dmem[103],
-    // dut.dpath.dmem.dmem[104],dut.dpath.dmem.dmem[105],dut.dpath.dmem.dmem[106],
-    // dut.dpath.dmem.dmem[107],dut.dpath.dmem.dmem[108],dut.dpath.dmem.dmem[109]);
+    $monitor($time," Array: %d %d %d %d %d %d %d %d %d %d ",dut.dpath.dmem.dmem[100],
+    dut.dpath.dmem.dmem[101],dut.dpath.dmem.dmem[102],dut.dpath.dmem.dmem[103],
+    dut.dpath.dmem.dmem[104],dut.dpath.dmem.dmem[105],dut.dpath.dmem.dmem[106],
+    dut.dpath.dmem.dmem[107],dut.dpath.dmem.dmem[108],dut.dpath.dmem.dmem[109]);
 
     
     #10000 $finish; // Finish the simulation after 10000 time units

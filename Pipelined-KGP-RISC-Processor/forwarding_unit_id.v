@@ -20,6 +20,7 @@ forward A
 011 : (not of 01 condition) and (not of 10 condition) and (dest == rs and id_ex_regwrite == 1)
 100 : (not of 01 condition) and (not of 10 condition) and  (not of 11 condition) and (mem_wb_regwrite == 1 and mem_wb_destadd == rs)
 
+same as forwardB, use rt in place of rs.
 */
 reg [2:0] fA,fB;
 

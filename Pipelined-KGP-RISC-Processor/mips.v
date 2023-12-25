@@ -58,7 +58,7 @@ wire mem_wb_regwrite,mem_wb_memtoreg;
 wire [31:0] wb_writedata;
 
 // IF Stage
-assign pcwriteen = pc_en & pc_write;
+assign pcwriteen = pc_en & pc_write; // PC enable
 register pcreg(clk,reset,pcwriteen,pcnext,pcout); // Program Counter Register
 instr_mem imem(clk,1'b1,pcout[7:2],instr,pc_en); // Instruction Memory
 adder addpc(pcout,32'h00000004,pcplus4); // Adder for PC + 4
@@ -76,11 +76,13 @@ assign rd = if_id_irout[15:11];
 register_bank rbank(clk,mem_wb_regwrite,reset,rs,rt,mem_wb_destadd,wb_writedata,rData1,rData2); // Register Bank
 signext ext(if_id_irout[15:0],imm); // Sign Extend
 mux offsetmux({imm[29:0],2'b00},{{4{if_id_irout[25]}},if_id_irout[25:0],2'b00},jump,offset);
-adder pcbranchadder(if_id_npcout,offset,pcbranch);
+adder pcbranchadder(if_id_npcout,offset,pcbranch);// Next Address 
+
+// ID Stage Forwarding Unit
 forwarding_unit_id forwarding(rs,rt,
         dest,ex_mem_destadd,mem_wb_destadd,id_ex_regwrite,ex_mem_readdmem,ex_mem_regwrite,ex_mem_memtoreg,mem_wb_regwrite,forwardA,forwardB);
-mux5 readdatamux1(rData1,readdmemData,ex_mem_result,result,wb_writedata,forwardA,ReadData1out);
-mux5 readdatamux2(rData2,readdmemData,ex_mem_result,result,wb_writedata,forwardB,ReadData2out);
+mux5 readdatamux1(rData1,readdmemData,ex_mem_result,result,wb_writedata,forwardA,ReadData1out);// Final Read Data 1
+mux5 readdatamux2(rData2,readdmemData,ex_mem_result,result,wb_writedata,forwardB,ReadData2out);// Final Read Data 2
 
 // controller
 controller controllerunit(clk,reset,if_id_irout,branch_condition,alusrc,alufunc,regdest,readdmem,writedmem,regwrite,memtoreg,jump,pcsrc);
@@ -89,7 +91,7 @@ controller controllerunit(clk,reset,if_id_irout,branch_condition,alusrc,alufunc,
 condition comparisonblock(branch_condition,if_id_irout[27:26],ReadData1out,ReadData2out);
 
 // Stall Control
-stall_control stallunit(id_ex_readdmem,writedmem,id_ex_rt,if_id_irout[25:21],if_id_irout[20:16],stall,pc_write,if_id_write);
+stall_control stallunit(id_ex_readdmem,writedmem,id_ex_rt,rs,rt,stall,pc_write,if_id_write);
 
 // flush control
 assign if_flush = pcsrc;
@@ -110,7 +112,6 @@ register #(1) ID_EX_ALUsrc(clkbar,reset,1'b1,id_alusrc,id_ex_alusrc);
 register #(4) ID_EX_ALUfunc(clkbar,reset,1'b1,id_alufunc,id_ex_alufunc);
 register #(1) ID_EX_Regdest(clkbar,reset,1'b1,id_regdest,id_ex_regdest);
 
-
 // ID/EX Stage Control Signals for MEM Stage
 register #(1) ID_EX_MemRead(clkbar,reset,1'b1,id_readdmem,id_ex_readdmem);
 register #(1) ID_EX_Memwrite(clkbar,reset,1'b1,id_writedmem,id_ex_writedmem);
@@ -125,8 +126,9 @@ register #(1) ID_EX_MemtoReg(clkbar,reset,1'b1,id_memtoreg,id_ex_memtoreg);
 // EX Stage
 // mux3 mux3A(id_ex_rData1,wb_writedata,ex_mem_result,forwardA,aluin1);
 // mux3 mux3B(id_ex_rData2,wb_writedata,ex_mem_result,forwardB,writedatadmem);
-mux alumux(id_ex_rData2,id_ex_immout,id_ex_alusrc,aluin2);
-ALU alu(id_ex_rData1,aluin2,id_ex_alufunc,1'b1,zero,result); // Arithmetic Logic Unit
+assign aluin1 = id_ex_rData1;
+mux alumux(id_ex_rData2,id_ex_immout,id_ex_alusrc,aluin2); // ALU mux
+ALU alu(aluin1,aluin2,id_ex_alufunc,1'b1,zero,result); // Arithmetic Logic Unit
 mux #(5) destmux(id_ex_rt,id_ex_rd,id_ex_regdest,dest); // Mux for Destination Address
 
 // EX/MEM Stage
@@ -144,6 +146,7 @@ register #(1) EX_MEM_Regwrite(clkbar,reset,1'b1,id_ex_regwrite,ex_mem_regwrite);
 register #(1) EX_MEM_MemtoReg(clkbar,reset,1'b1,id_ex_memtoreg,ex_mem_memtoreg);
 
 // MEM Stage
+// load store btpassing unit
 load_store_bypassing_unit loadstore(mem_wb_memtoreg,ex_mem_writedmem,ex_mem_destadd,mem_wb_destadd,forwardC);
 mux loadstoreselect(ex_mem_writeData,mem_wb_readData2,forwardC,finalWriteData);
 data_mem dmem(clk,reset,ex_mem_writedmem,ex_mem_readdmem,ex_mem_result,finalWriteData,readdmemData); // Data Memory
@@ -161,7 +164,3 @@ register #(1) MEM_WB_MemtoReg(clkbar,reset,1'b1,ex_mem_memtoreg,mem_wb_memtoreg)
 mux wbmux(mem_wb_readData1,mem_wb_readData2,mem_wb_memtoreg,wb_writedata); // Mux for Writeback
 
 endmodule
-
-
-// completing the ISA
-// gcd implementation

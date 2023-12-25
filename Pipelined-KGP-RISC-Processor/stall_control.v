@@ -6,9 +6,11 @@ module stall_control (
 
     output wire stall,pc_write,if_id_write
 );
-
 wire x,y,z;
-
+/*
+if ((id_ex_readdmem == 1) and ((id_ex_rt == rs) or (id_ex_rt == rt)))
+    then stall
+*/
 assign x = id_ex_readdmem == 1;
 assign y = (id_ex_rt == rs) | (id_ex_rt == rt);
 assign z = x & y & ~writedmem;

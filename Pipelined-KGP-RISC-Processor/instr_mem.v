@@ -7,7 +7,7 @@ module instr_mem (
 );
     
 reg [31:0] imem[0:63];
-reg [31:0] I;
+
 // initial
 //       $readmemh("instr.txt", imem);
 /*
