@@ -18,8 +18,8 @@ module condition (
 wire lt,gt,eq,neq;
 COMPARE cmp (lt,gt,eq,neq,a,b);
 
-assign y =  (~opcond[1] & ~opcond[0] & gt) |
-            (~opcond[1] & opcond[0] & lt)  |
+assign y =  (~opcond[1] & ~opcond[0] & lt) |
+            (~opcond[1] & opcond[0] & gt)  |
             (opcond[1] & ~opcond[0] & eq)  |
             (opcond[1] & opcond[0] & neq) ;
 

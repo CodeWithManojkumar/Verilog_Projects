@@ -15,13 +15,14 @@ wire branch;
 assign {alusrc,alufunc,regdest,
     readdmem,writedmem,regwrite,memtoreg,jump,branch} = control_signals;
 
-always @(posedge clk or negedge reset)
+always @(negedge clk or negedge reset)
 begin
     if(reset) begin
         control_signals <= 12'b0;
     end
-
-    else #1 begin
+    else if(instr == 32'b0)
+        control_signals <= 12'b0;
+    else #2 begin
         case (instr[31:30])
             2'b00 : begin
                 {control_signals[11],control_signals[6:0]} <= 8'b01001000;
@@ -60,7 +61,7 @@ begin
                     6'b100010 : control_signals <= 12'b100000010000; // ST
                 endcase
             end
-            2'b10 : begin
+            2'b11 : begin
                 case (instr[31:26])
                     6'b110000 : control_signals <= 12'b000000000001; // BLT
                     6'b110001 : control_signals <= 12'b000000000001; // BGT

@@ -20,8 +20,8 @@ module mips_tb;
     reset = 1;
     #15 reset = 0;
 
-  $readmemh("instr_test.txt", dut.dpath.imem.imem); // Basic Instructions
-  // $readmemh("gcd_test.txt", dut.dpath.imem.imem);     // GCD instructions
+  // $readmemh("instr_test.txt", dut.dpath.imem.imem); // Basic Instructions
+  $readmemh("gcd_test.txt", dut.dpath.imem.imem);     // GCD instructions
   // $readmemh("sorting_test.txt", dut.dpath.imem.imem);    // Sorting instructions
 
   
@@ -35,13 +35,13 @@ module mips_tb;
     // uncomment the codes and run the instructions
 
     // Basic Instructions Results
-    $monitor($time," register values : %d  %d  %d  %d  %d",
-    dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.rbank.regfile[4],dut.dpath.rbank.regfile[5],dut.dpath.dmem.dmem[7]);
+    // $monitor($time," register values : %d  %d  %d  %d  %d",
+    // dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.rbank.regfile[4],dut.dpath.rbank.regfile[5],dut.dpath.dmem.dmem[7]);
 
 
     // GCD Results
-    // $monitor($time," register values : %d  %d  %d data_memory:  %d  %d  %d",
-    // dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.dmem.dmem[0],dut.dpath.dmem.dmem[1],dut.dpath.dmem.dmem[2]);
+    $monitor($time," register values : %d  %d  %d data_memory:  %d  %d  %d",
+    dut.dpath.rbank.regfile[1],dut.dpath.rbank.regfile[2],dut.dpath.rbank.regfile[3],dut.dpath.dmem.dmem[0],dut.dpath.dmem.dmem[1],dut.dpath.dmem.dmem[2]);
 
 
     // Sorting Results

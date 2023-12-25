@@ -1,10 +1,13 @@
 module instr_mem (
-    input read,
+    input wire clk,
+    input wire read,
     input wire [5:0] addr,
-    output wire [31:0] I
+    output wire [31:0] instr,
+    output wire pc_en
 );
     
 reg [31:0] imem[0:63];
+reg [31:0] I;
 // initial
 //       $readmemh("instr.txt", imem);
 /*
@@ -16,5 +19,6 @@ initial begin
 end
 */
 
-assign I = (read)? imem[addr] : 32'bx;
+assign instr = (imem[addr] != 32'hffffffff) ? imem[addr] : 32'bx;
+assign pc_en = (imem[addr] != 32'hffffffff) ? 1'b1 : 1'b0;
 endmodule

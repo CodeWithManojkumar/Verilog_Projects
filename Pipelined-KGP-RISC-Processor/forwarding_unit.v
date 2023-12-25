@@ -16,7 +16,7 @@ assign a2 = (mem_wb_regwrite == 1'b1) ;
 assign b2 = (mem_wb_rd == id_ex_rs);
 assign y = a2 & b2;
 
-assign forwardA[1] = x;
+assign forwardA[1] = x & ~y;
 assign forwardA[0] = ~x & y ; 
 
 
@@ -26,7 +26,7 @@ assign x1 = a1 & b3;
 assign b4 = (mem_wb_rd == id_ex_rt);
 assign y1 = a2 & b4;
 
-assign forwardB[1] = x1;
+assign forwardB[1] = x1 & ~y1;
 assign forwardB[0] = ~x1 & y1 ; 
 
 endmodule
