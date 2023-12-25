@@ -146,8 +146,7 @@ register #(1) EX_MEM_Regwrite(clkbar,reset,1'b1,id_ex_regwrite,ex_mem_regwrite);
 register #(1) EX_MEM_MemtoReg(clkbar,reset,1'b1,id_ex_memtoreg,ex_mem_memtoreg);
 
 // MEM Stage
-// load store btpassing unit
-load_store_bypassing_unit loadstore(mem_wb_memtoreg,ex_mem_writedmem,ex_mem_destadd,mem_wb_destadd,forwardC);
+load_store_bypassing_unit loadstore(mem_wb_memtoreg,ex_mem_writedmem,ex_mem_destadd,mem_wb_destadd,forwardC); // load store btpassing unit
 mux loadstoreselect(ex_mem_writeData,mem_wb_readData2,forwardC,finalWriteData);
 data_mem dmem(clk,reset,ex_mem_writedmem,ex_mem_readdmem,ex_mem_result,finalWriteData,readdmemData); // Data Memory
 
