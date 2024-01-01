@@ -8,7 +8,7 @@ module register
 
 	always @(posedge clk or negedge reset)
     begin
-       #1 if(reset)
+        if(reset)
             dout<=0;
         else if(ld)
             dout<=din;

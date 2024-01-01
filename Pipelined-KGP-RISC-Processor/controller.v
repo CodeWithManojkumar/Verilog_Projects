@@ -22,7 +22,7 @@ begin
     end
     else if(instr == 32'b0)
         control_signals <= 12'b0;
-    else #2 begin
+    else #1 begin
         case (instr[31:30])
             2'b00 : begin
                 {control_signals[11],control_signals[6:0]} <= 8'b01001000;
