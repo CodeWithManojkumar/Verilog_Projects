@@ -85,7 +85,7 @@ mux5 readdatamux1(rData1,readdmemData,ex_mem_result,result,wb_writedata,forwardA
 mux5 readdatamux2(rData2,readdmemData,ex_mem_result,result,wb_writedata,forwardB,ReadData2out);// Final Read Data 2
 
 // controller
-controller controllerunit(clk,reset,if_id_irout,branch_condition,alusrc,alufunc,regdest,readdmem,writedmem,regwrite,memtoreg,jump,pcsrc);
+controller controllerunit(reset,if_id_irout,branch_condition,alusrc,alufunc,regdest,readdmem,writedmem,regwrite,memtoreg,jump,pcsrc);
 
 // comparison block
 condition comparisonblock(branch_condition,if_id_irout[27:26],ReadData1out,ReadData2out);

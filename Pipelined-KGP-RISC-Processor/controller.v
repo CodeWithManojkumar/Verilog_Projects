@@ -1,5 +1,5 @@
 module controller (
-    input wire clk,reset,
+    input wire reset,
     input wire [31:0] instr,
     input wire branch_condition,
     output wire alusrc,
@@ -15,14 +15,14 @@ wire branch;
 assign {alusrc,alufunc,regdest,
     readdmem,writedmem,regwrite,memtoreg,jump,branch} = control_signals;
 
-always @(negedge clk or negedge reset)
+always @*
 begin
     if(reset) begin
         control_signals <= 12'b0;
     end
     else if(instr == 32'b0)
         control_signals <= 12'b0;
-    else #1 begin
+    else begin
         case (instr[31:30])
             2'b00 : begin
                 {control_signals[11],control_signals[6:0]} <= 8'b01001000;
